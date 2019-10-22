@@ -8,4 +8,7 @@
     <string name="Quizz_btn1">Sponge Bob</string>
     <string name="Quizz_btn2">Alors on attend pas patrick ?</string>
     <string name="Quizz_btn3">Malabar le calamar</string>
+    <string name="title_activity_reponse_quizz">Reponse_quizz</string>
+
+    <string name="score_quizz">Score du quiz</string>
 </resources>

@@ -1,5 +1,6 @@
 package com.example.iut_orsay;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -16,6 +17,8 @@ import android.widget.Button;
 
 public class Quizz extends AppCompatActivity {
 
+    int compteut_quizz=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,20 +30,36 @@ public class Quizz extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                Snackbar.make(view, "Vous n'avez pas trouver toutes les bonnes réponses", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                validation_quizz();
+                compteut_quizz = 0;
             }
         });
     }
 
     public void verif_rep(View v){
-            int id = v.getId();
-            Button btn = findViewById(id);
+            Button btn = findViewById(v.getId());
             String txt = btn.getText().toString();
-            Log.d("Test_recup:","voici le texte du bouton : "+txt);
+            Log.d("test",txt);
+            if(txt.equals("Sponge Bob") || txt.equals("Alors on attend pas patrick ?")){
+                if(compteut_quizz < 3)
+                {
+                    compteut_quizz = compteut_quizz + 1;
+                }
+            }
     }
 
     public void  validation_quizz(){
+        Log.d("score","your score : " + this.compteut_quizz);
+        if(compteut_quizz == 2 || compteut_quizz == 1){
+            Intent i = new Intent(this,Reponse_quizz.class);
+            i.putExtra("score",String.valueOf(compteut_quizz));
+            startActivity(i);
+        }
+    }
+
+    public void verif_quizz(View v){
 
     }
 
