@@ -1,0 +1,85 @@
+<resources>
+    <string name="app_name">AccessDroid</string>
+    <string name="title_activity_main2">Accessibilité</string>
+
+    <string name="navigation_drawer_open"></string>
+    <string name="navigation_drawer_close"></string>
+
+    <string name="action_settings">Settings</string>
+
+    <string name="fragment_bouton_intro">
+        Boutons
+        \nVous devez rendre accessible ce fragment.
+        \n\nIndice : Les boutons n\'ont pas de signification pertinente. Et l\'utilisateur doit être notifié du changement.
+        \n\nCode : layout/fragment_bouton.xml, java/BoutonFragment.java
+        \n\nDocumentation : Mise à jour dynamique de la description des contenus
+    </string>
+
+    <string name="fragment_form_intro">
+        Formulaires
+        \nVous devez rendre accessible ce formulaire.
+        \n\nIndice : Les \"hint\" ne sont pas notifiés par les services d\'accessibilité.
+        \n\nCode : layout/fragment_form.xml, java/FormFragment.java
+        \n\nDocumentation : Décrire les éléments d\'interface
+    </string>
+
+    <string name="fragment_image_intro">
+        Images
+        \nVous devez rendre accessible ce fragment.
+        \n\nIndice : Image et non-voyant.
+        \n\nCode : layout/fragment_image.xml, java/ImageFragment.java
+        \n\nDocumentation : Décrire les éléments d\'interface
+    </string>
+
+    <string name="fragment_main_intro">
+        Bienvenue sur cette application !
+        \n\nVous avez un menu contenant différents thèmes.
+        Chaque thème contient un fragment qu\'il faudra rendre accessible. Il y aura des indices ainsi que des aides pointant vers la documentation.
+        \n\nVous pouvez vous aider de ce document mis à disposition par le gouvernement :
+        https://github.com/DISIC/guide-mobile_app_dev_natif/blob/master/android.md
+    </string>
+
+    <string name="fragment_group_intro">
+        Groupe d\'éléments
+        \nVous devez rendre accessible ce fragment.
+        \n\nIndice : Passer de 3 éléments à 1 élément.
+        \n\nCode : layout/fragment_group.xml, java/GroupFragment.java
+        \n\nDocumentation : Regrouper des éléments
+    </string>
+
+    <string name="fragment_structure_intro">
+        Structure
+        \nVous devez rendre accessible ce fragment.
+        \n\nIndice : Ordre du focus
+        \n\nCode : layout/fragment_structure.xml, java/StructureFragment/java
+        \n\nDocumentation : Gérer le focus
+    </string>
+
+    <string name="fragment_text_intro">
+        Texte et Design
+        \nVous devez rendre accessible ce fragment.
+        \n\nIndice : Essayer de zoomer le texte. (Quelle couleur flashy !)
+        \n\nCode : layout/fragment_text.xml, java/TextFragment.java
+        \n\nDocumentation : Permettre la modification de la taille des caractères
+    </string>
+
+    <string name="fragment_text_wiki">
+        L\'Empire romain est le nom donnée par les historiens à la domination romaine antique entre 27 av. J.-C. et 476 ap. J.-C..
+        Pour la période postérieure, de 476 à 1453 ap. J.-C., qui concerne surtout la partie orientale de l\'Empire, avec Constantinople pour capitale,
+        les historiens modernes parlent aujourd\'hui d\'Empire byzantin. Ce terme n\'est toutefois apparu qu\'au XVIème siècle, ses habitants de l\'époque
+        l\'appelant toujours "empire des Romains". La distinction entre Empire romain et Empire byzantin, ainsi que la date de naissance assignée à ce dernier
+        sont d\'ailleurs une question de convention entre chercheurs modernes.
+    </string>
+
+    <string name="fragment_tool_intro">
+        Outils
+        \n\nAndroid founit de nombreux outils afin de rendre son contenu accessible.
+        \n  - Gestes d\'agrandissement
+        \n  - Grands caractères
+        \n  - Texte contraste élevé
+        \n  - Inversion des couleurs
+        \n  - Corrections des couleurs
+        \n  - Talkback
+    </string>
+
+</resources>

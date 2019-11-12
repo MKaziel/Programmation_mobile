@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_accueil"
+        android:title="Accueil"
+        />
+
+    <item android:title="Thèmes">
+        <menu>
+            <item
+                android:id="@+id/nav_boutons"
+                android:title="Boutons"
+                android:icon="@android:drawable/ic_menu_upload"
+                />
+            <item
+                android:id="@+id/nav_texte"
+                android:title="Texte et Design"
+                android:icon="@android:drawable/ic_menu_search"
+                />
+            <item
+                android:id="@+id/nav_formulaires"
+                android:title="Formulaires"
+                android:icon="@android:drawable/ic_menu_edit" />
+            <item
+                android:id="@+id/nav_groupe"
+                android:title="Groupe d'éléments"
+                android:icon="@android:drawable/ic_menu_week"
+                />
+            <item
+                android:id="@+id/nav_images"
+                android:title="Images"
+                android:icon="@android:drawable/ic_menu_gallery"/>
+            <item
+                android:id="@+id/nav_structure"
+                android:title="Structure"
+                android:icon="@android:drawable/ic_menu_view"
+                />
+            <item
+                android:id="@+id/nav_outils"
+                android:title="Outils"
+                android:icon="@android:drawable/ic_menu_preferences"
+                />
+        </menu>
+    </item>
+
+</menu>
