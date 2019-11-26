@@ -1,23 +1,26 @@
-package com.example.chuckorsaydb;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.question_reponse;
 
 import android.content.ContentValues;
-import android.content.SharedPreferences;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.EditText;
-import android.widget.Switch;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -25,83 +28,113 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final String DBNAME = "ZakiaDB";
+
+    private static final String DBNAME = "questiondb";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        dbInit();
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
+        dbInit();
+        dbQuery();
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 
     @Override
-    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        //switch
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
 
-        return super.onOptionsItemSelected(item);
+        //noinspection SimplifiableIfStatement
+        switch (item.getItemId()) {
+            case R.id.action_formulaire:
+                onClick_quizz();
+                return true;
+            case R.id.action_settings :
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
     }
+
+    public void onClick_quizz(){
+        Intent i = new Intent(this, com.example.question_reponse.Quizz.class);
+        startActivity(i);
+
+    }
+
+    public void onClick_quizz(View v){
+        Intent i = new Intent(this, com.example.question_reponse.Quizz.class);
+        startActivity(i);
+
+    }
+
 
     public void dbInit() {
         SQLiteDatabase db = openOrCreateDatabase(DBNAME, MODE_PRIVATE, null);
 
-        db.execSQL("DROP TABLE IF EXISTS Questions");
-        db.execSQL("DROP TABLE IF EXISTS Reponse");
+        db.execSQL("DROP TABLE IF EXISTS questions");
 
 
-        db.execSQL("CREATE TABLE Questions (" +
+        db.execSQL("CREATE TABLE questions (" +
                 "    id      INTEGER             NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                "    texte_question  VARCHAR2(100)     NOT NULL)");
+                "    question  VARCHAR(40)     NOT NULL," +
+                "    rep1  VARCHAR(40)     NOT NULL," +
+                "    rep2  VARCHAR(40)     NOT NULL," +
+                "    rep3   VARCHAR(40)     NOT NULL," +
+                "    answer INEGER(10)     NOT NULL)");
 
-        db.execSQL("CREATE TABLE Reponse (" +
-                "    id      INTEGER             NOT NULL PRIMARY KEY AUTOINCREMENT," +
-                "    id_question  INTEGER     NOT NULL," +
-                "    texte_reponse   VARCHAR2(100)     NOT NULL)");
 
-        ContentValues vals = new ContentValues();
-        vals.put("texte_question", "mmmmmmm?");
-        db.insert("Questions", null, vals);
+            ContentValues vals = new ContentValues();
+            vals.put("question", "1 + 1 = ?");
+            vals.put("rep1", "1");
+            vals.put("rep2", "2");
+            vals.put("rep3", "11");
+            vals.put("answer","2");
 
-        vals.clear();
-        vals.put("id_question",1);
-        vals.put("texte_reponse","tttttttt!");
-        db.insert("Reponse",null,vals);
+            long res = db.insert("questions", null, vals);
 
-        vals.clear();
-        vals.put("id_question",1);
-        vals.put("texte_reponse","tttttttt");
-        db.insert("Reponse",null,vals);
+            vals.put("question", "Que faire dans cette situation ?");
+            vals.put("rep1", "J'accélère");
+            vals.put("rep2", "Je m'arrète");
+            vals.put("rep3", "Je klaxonne");
+            vals.put("answer","Je m'arrète");
 
-        vals.clear();
-        vals.put("texte_question", "ttttttttt?");
-        db.insert("Questions", null, vals);
+            long res2 = db.insert("questions", null, vals);
 
-        vals.clear();
-        vals.put("id_question",2);
-        vals.put("texte_reponse","mmmmmmm");
-        db.insert("Reponse",null,vals);
+            vals.put("question", "Quelle est la masse de la Terre");
+            vals.put("rep1", "6,12 x 10^33kg");
+            vals.put("rep2", "5,97 x 10^24kg");
+            vals.put("rep3", "5,97 x 10^24g");
+            vals.put("answer","5,97 x 10^24kg");
+            long res3 = db.insert("questions", null, vals);
 
-        vals.clear();
-        vals.put("id_question",2);
-        vals.put("texte_reponse","mmmmmmm!");
-        db.insert("Reponse",null,vals);
+
+            Log.d("dbInit", "insert: " + res);
+        Log.d("dbInit", "insert: " + res2);
+        Log.d("dbInit", "insert: " + res3);
 
         Log.d("dbInit", "initialized");
 
         TableLayout tab = findViewById(R.id.table);
         tab.removeAllViews();
 
-        EditText queryText = findViewById(R.id.queryText);
-        queryText.setText("SELECT * FROM Questions");
+
     }
 
-    public void dbQuery(View v) {
+
+    public void dbQuery() {
         Log.d("dbQuery", "query start");
 
         SQLiteDatabase db = openOrCreateDatabase(DBNAME, MODE_PRIVATE, null);
@@ -110,14 +143,12 @@ public class MainActivity extends AppCompatActivity {
         // remove rows from previous query
         tab.removeAllViews();
 
-        // fetch query string
-        EditText queryText = findViewById(R.id.queryText);
-        String query = queryText.getText().toString();
+
 
         // execute SQL query
         Cursor cur;
         try {
-            cur = db.rawQuery(query, null);
+            cur = db.rawQuery("Select * from questions", null);
         } catch(SQLiteException e) {
             Toast.makeText(this, "SQL error", Toast.LENGTH_LONG).show();
             Log.d("dbQuery", "SQL error: " + e);
@@ -163,21 +194,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Log.d("dbQuery", "query end");
-    }
-
-    public void dbInit(View view){
-        dbInit();
-    }
-
-    protected void onPause() {
-        super.onPause();
-
-        Switch switch1 = findViewById(R.id.switch1);
-        Log.d("switch1", "paused: " + switch1.isChecked());
-
-        SharedPreferences prefs = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = prefs.edit();
-        ed.putBoolean("switch1", switch1.isChecked());
-        ed.apply();
     }
 }
