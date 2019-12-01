@@ -15,7 +15,7 @@ import android.widget.TextView;
 
 public class Reponse_quizz extends AppCompatActivity {
 
-    Integer resultats;
+    String resultats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +26,17 @@ public class Reponse_quizz extends AppCompatActivity {
 
         TextView tv = findViewById(R.id.textAnswerQuiz);
 
-        resultats = getIntent().getIntExtra("result", 404);
+        Bundle bundle = getIntent().getExtras();
 
-        Log.d("Test résult : ", resultats.toString());
+        if(bundle.getString("result") != null)
+        {
+            resultats = bundle.getString("result");
 
-        tv.setText("Ton score est : "+resultats);
+            Log.d("Test résult : ", resultats);
+
+            tv.setText("Ton score est : " + resultats);
+        }
+
 
 
     }

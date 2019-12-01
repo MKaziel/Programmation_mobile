@@ -2,32 +2,24 @@ package com.example.question_reponse;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
-import android.graphics.Color;
-import android.graphics.Typeface;
-import android.os.Build;
 import android.os.Bundle;
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TableLayout;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Quizz extends AppCompatActivity {
 
+
+
+    protected int resultat_question = 0;
     int compteut_quizz=0;
     TextView question;
     Button rep1;
@@ -35,7 +27,6 @@ public class Quizz extends AppCompatActivity {
     Button rep3;
     String reponse;
     int nbquestions;
-    int point = 0;
     Intent i;
 
     private static final String DBNAME = "questiondb";
@@ -50,84 +41,39 @@ public class Quizz extends AppCompatActivity {
         rep2 = findViewById(R.id.button2);
         rep3 = findViewById(R.id.button3);
         compteut_quizz = compteut_quizz + 1;
+
         Log.d("Cpt", String.valueOf(compteut_quizz));
         Log.d("nbQuestions", String.valueOf(nbquestions));
         Log.d("Create", "Création");
         dbQuery();
         Log.d("TEST","Après DBQUERY");
         i = new Intent(this, Reponse_quizz.class);
+    }
 
-       rep1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(rep1.getText() == reponse && compteut_quizz <= nbquestions){
-                    compteut_quizz = compteut_quizz + 1;
-                    point += 1;
-                    dbQuery();
-                    Log.d("POINT",String.valueOf(point));
-                    Log.d("Rep","OK1");
-                } else if(rep1.getText() != reponse && compteut_quizz <= nbquestions){
-                    compteut_quizz = compteut_quizz + 1;
-                    Log.d("POINT",String.valueOf(point));
-                    Log.d("Rep","PAS OK1");
-                    dbQuery();
-                } if(compteut_quizz > nbquestions){
-                    Log.d("Test résult : ", String.valueOf(point));
-                    i.putExtra("result",point);
-                    startActivity(i);
-                }
+    public void onClickQuizz(View v) {
+        Button btn = findViewById(v.getId());
+        String txt = btn.getText().toString();
+
+        if(txt == reponse && compteut_quizz <= nbquestions){
+            compteut_quizz = compteut_quizz + 1;
+            int i = getResultat_question() + 1;
+            setResultat_question(i);
+            dbQuery();
+            Log.d("POINT",String.valueOf(resultat_question));
+            Log.d("Rep","OK1");
+        } else if(txt != reponse && compteut_quizz <= nbquestions){
+            compteut_quizz = compteut_quizz + 1;
+            Log.d("POINT",String.valueOf(resultat_question));
+            Log.d("Rep","PAS OK1");
+            dbQuery();
+        } if(compteut_quizz > nbquestions){
+            if(resultat_question!=0){
+                Log.d("Test résult : ", String.valueOf(resultat_question));
+                i.putExtra("result",resultat_question);
+                startActivity(i);
             }
-        });
-       rep2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Button 1", "Clique sur le bouton "+ rep2.getText() + reponse + compteut_quizz + nbquestions);
-                if(rep2.equals(reponse) && compteut_quizz <= nbquestions){
-                    compteut_quizz = compteut_quizz + 1;
-                    point += + 1;
-                    dbQuery();
-                    Log.d("POINT",String.valueOf(point));
-                    Log.d("Rep","OK2");
-                } else if(!rep2.equals(reponse) && compteut_quizz <= nbquestions){
-                    compteut_quizz = compteut_quizz + 1;
-                    Log.d("POINT",String.valueOf(point));
-                    Log.d("Rep","PAS OK2");
-                    dbQuery();
-                } if(compteut_quizz > nbquestions){
-                    Log.d("POINT",String.valueOf(point));
-                    i.putExtra("result",point);
-                    startActivity(i);
-                }
-            }
-        });
-       rep3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Log.d("Button 1", "Clique sur le bouton "+ rep3.getText() + reponse + compteut_quizz + nbquestions);
-                if(rep3.getText() == reponse && compteut_quizz <= nbquestions){
-                    compteut_quizz = compteut_quizz + 1;
-                    point += 1;
-                    dbQuery();
-                    Log.d("POINT", String.valueOf(point));
-                    Log.d("Rep","OK3");
-                } else if(rep3.getText() != reponse && compteut_quizz <= nbquestions){
-                    compteut_quizz = compteut_quizz + 1;
-                    Log.d("POINT",String.valueOf(point));
-                    Log.d("Rep","PAS OK3");
-                    dbQuery();
-                } if(compteut_quizz > nbquestions){
-                    if(point!=0)
-                    {
-                        Log.d("POINT",String.valueOf(point));
-                        i.putExtra("result",point);
-                        startActivity(i);
-                    }
-                }
-            }
-        });
 
-
-
+        }
     }
 
     public void dbQuery() {
@@ -185,6 +131,12 @@ public class Quizz extends AppCompatActivity {
         Log.d("dbQuery", "query end");
     }
 
+    public void setResultat_question(int resultat_question) {
+        this.resultat_question = resultat_question;
+    }
 
+    public int getResultat_question() {
+        return resultat_question;
+    }
 
 }
