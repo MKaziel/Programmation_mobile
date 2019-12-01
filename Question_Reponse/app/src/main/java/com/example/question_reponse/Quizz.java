@@ -62,7 +62,7 @@ public class Quizz extends AppCompatActivity {
             public void onClick(View view) {
                 if(rep1.getText() == reponse && compteut_quizz <= nbquestions){
                     compteut_quizz = compteut_quizz + 1;
-                    point = point + 1;
+                    point += 1;
                     dbQuery();
                     Log.d("POINT",String.valueOf(point));
                     Log.d("Rep","OK1");
@@ -71,9 +71,10 @@ public class Quizz extends AppCompatActivity {
                     Log.d("POINT",String.valueOf(point));
                     Log.d("Rep","PAS OK1");
                     dbQuery();
-                } else if(compteut_quizz >= nbquestions){
-                    startActivity(i);
+                } if(compteut_quizz > nbquestions){
+                    Log.d("Test résult : ", String.valueOf(point));
                     i.putExtra("result",point);
+                    startActivity(i);
                 }
             }
         });
@@ -83,7 +84,7 @@ public class Quizz extends AppCompatActivity {
                 Log.d("Button 1", "Clique sur le bouton "+ rep2.getText() + reponse + compteut_quizz + nbquestions);
                 if(rep2.equals(reponse) && compteut_quizz <= nbquestions){
                     compteut_quizz = compteut_quizz + 1;
-                    point = point + 1;
+                    point += + 1;
                     dbQuery();
                     Log.d("POINT",String.valueOf(point));
                     Log.d("Rep","OK2");
@@ -92,10 +93,10 @@ public class Quizz extends AppCompatActivity {
                     Log.d("POINT",String.valueOf(point));
                     Log.d("Rep","PAS OK2");
                     dbQuery();
-                } else if(compteut_quizz >= nbquestions){
+                } if(compteut_quizz > nbquestions){
                     Log.d("POINT",String.valueOf(point));
-                    startActivity(i);
                     i.putExtra("result",point);
+                    startActivity(i);
                 }
             }
         });
@@ -105,7 +106,7 @@ public class Quizz extends AppCompatActivity {
                 Log.d("Button 1", "Clique sur le bouton "+ rep3.getText() + reponse + compteut_quizz + nbquestions);
                 if(rep3.getText() == reponse && compteut_quizz <= nbquestions){
                     compteut_quizz = compteut_quizz + 1;
-                    point = point + 1;
+                    point += 1;
                     dbQuery();
                     Log.d("POINT", String.valueOf(point));
                     Log.d("Rep","OK3");
@@ -114,10 +115,13 @@ public class Quizz extends AppCompatActivity {
                     Log.d("POINT",String.valueOf(point));
                     Log.d("Rep","PAS OK3");
                     dbQuery();
-                } else if(compteut_quizz >= nbquestions){
-                    Log.d("POINT",String.valueOf(point));
-                    startActivity(i);
-                    i.putExtra("result",point);
+                } if(compteut_quizz > nbquestions){
+                    if(point!=0)
+                    {
+                        Log.d("POINT",String.valueOf(point));
+                        i.putExtra("result",point);
+                        startActivity(i);
+                    }
                 }
             }
         });

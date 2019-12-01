@@ -97,11 +97,11 @@ public class MainActivity extends AppCompatActivity {
 
 
             ContentValues vals = new ContentValues();
-            vals.put("question", "1 + 1 = ?");
+            vals.put("question", "1 & 1 = ?");
             vals.put("rep1", "1");
             vals.put("rep2", "2");
             vals.put("rep3", "11");
-            vals.put("answer","2");
+            vals.put("answer","11");
 
             long res = db.insert("questions", null, vals);
 
@@ -109,15 +109,15 @@ public class MainActivity extends AppCompatActivity {
             vals.put("rep1", "J'accélère");
             vals.put("rep2", "Je m'arrète");
             vals.put("rep3", "Je klaxonne");
-            vals.put("answer","Je m'arrète");
+            vals.put("answer","Je klaxonne");
 
             long res2 = db.insert("questions", null, vals);
 
-            vals.put("question", "Quelle est la masse de la Terre");
-            vals.put("rep1", "6,12 x 10^33kg");
-            vals.put("rep2", "5,97 x 10^24kg");
-            vals.put("rep3", "5,97 x 10^24g");
-            vals.put("answer","5,97 x 10^24kg");
+            vals.put("question", "Qu'est-ce qui est jaune et qui vit dans un ananas dans la mer?");
+            vals.put("rep1", "Zakia ?");
+            vals.put("rep2", "Bob le bricoleur?");
+            vals.put("rep3", "Bob l'éponge?");
+            vals.put("answer","Bob l'éponge?");
             long res3 = db.insert("questions", null, vals);
 
 

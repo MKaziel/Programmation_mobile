@@ -26,8 +26,9 @@ public class Reponse_quizz extends AppCompatActivity {
 
         TextView tv = findViewById(R.id.textAnswerQuiz);
 
-        Intent i = getIntent();
-        resultats = i.getIntExtra("result",0);
+        resultats = getIntent().getIntExtra("result", 404);
+
+        Log.d("Test résult : ", resultats.toString());
 
         tv.setText("Ton score est : "+resultats);
 
