@@ -19,7 +19,7 @@ public class Quizz extends AppCompatActivity {
 
 
 
-    protected int resultat_question = 0;
+    Integer resultat_question = 0;
     int compteut_quizz=0;
     TextView question;
     Button rep1;
@@ -41,6 +41,7 @@ public class Quizz extends AppCompatActivity {
         rep2 = findViewById(R.id.button2);
         rep3 = findViewById(R.id.button3);
         compteut_quizz = compteut_quizz + 1;
+        setResultat_question(1);
 
         Log.d("Cpt", String.valueOf(compteut_quizz));
         Log.d("nbQuestions", String.valueOf(nbquestions));
@@ -68,8 +69,8 @@ public class Quizz extends AppCompatActivity {
             dbQuery();
         } if(compteut_quizz > nbquestions){
             if(resultat_question!=0){
-                Log.d("Test résult : ", String.valueOf(resultat_question));
-                i.putExtra("result",resultat_question);
+                Log.d("Test résult : ", String.valueOf(resultat_question-1));
+                i.putExtra("result",String.valueOf(resultat_question-1));
                 startActivity(i);
             }
 
