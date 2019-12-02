@@ -50,14 +50,12 @@ public class Quizzz extends AppCompatActivity {
         Button btn = findViewById(v.getId());
         String txt = btn.getText().toString();
 
-
-
-        if(txt == reponse && compteut_quizz <= nbquestions){
+        if(txt.equals(reponse) && compteut_quizz <= nbquestions){
             compteut_quizz = compteut_quizz + 1;
-            int i = getResultat_question() + 1;
-            setResultat_question(i);
+            int pt = getResultat_question() + 1;
+            setResultat_question(pt);
             dbQuery();
-            Log.d("POINT",String.valueOf(resultat_question));
+            Log.d("POINT",String.valueOf(pt));
             Log.d("Rep","OK1");
         } else if(txt != reponse && compteut_quizz <= nbquestions){
             compteut_quizz = compteut_quizz + 1;
