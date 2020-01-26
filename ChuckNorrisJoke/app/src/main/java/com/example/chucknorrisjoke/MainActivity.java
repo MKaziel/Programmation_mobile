@@ -77,9 +77,6 @@ public class MainActivity extends AppCompatActivity {
                     public void onCompleted(Exception e, JsonObject result) {
                         joke = result.get("value").getAsJsonObject().get("joke").getAsString();
                         Log.d("Test joke :", joke);
-                        TextView tv = findViewById(R.id.Text_joke);
-                        tv.setText(joke);
-                        tv.setContentDescription(joke);
                     }
                 });
     }

@@ -105,6 +105,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("dbQuery", "query start");
 
         SQLiteDatabase db = openOrCreateDatabase(DBNAME, MODE_PRIVATE, null);
+
         TableLayout tab = findViewById(R.id.table);
 
         // remove rows from previous query
